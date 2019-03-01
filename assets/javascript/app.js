@@ -21,50 +21,65 @@ var counter = {
 
 //Kinda done: make an array of questions with correct and incorrect answers
 var questions = [
-    ["1INSERT QUESTION HERE",
-    "11INSERT ANSWER HERE",
-    "12INSERT ANSWER HERE",
-    "13INSERT ANSWER HERE",
-    "14INSERT ANSWER HERE",
-    "1INSERT CORRECT ANSWER HERE"],
+    ["1 INSERT QUESTION HERE",
+    "11 INSERT ANSWER HERE",
+    "12 INSERT ANSWER HERE",
+    "13 INSERT ANSWER HERE",
+    "14 INSERT ANSWER HERE",
+    "1 INSERT CORRECT ANSWER HERE"],
 
-    ["2INSERT QUESTION HERE",
-    "21INSERT ANSWER HERE",
-    "22INSERT ANSWER HERE",
-    "23INSERT ANSWER HERE",
-    "24INSERT ANSWER HERE",
-    "2INSERT CORRECT ANSWER HERE"],
+    ["2 INSERT QUESTION HERE",
+    "21 INSERT ANSWER HERE",
+    "22 INSERT ANSWER HERE",
+    "23 INSERT ANSWER HERE",
+    "24 INSERT ANSWER HERE",
+    "2 INSERT CORRECT ANSWER HERE"],
 
-    ["3INSERT QUESTION HERE",
-    "31INSERT ANSWER HERE",
-    "32INSERT ANSWER HERE",
-    "33INSERT ANSWER HERE",
-    "34INSERT ANSWER HERE",
-    "3INSERT CORRECT ANSWER HERE"],
+    ["3 INSERT QUESTION HERE",
+    "31 INSERT ANSWER HERE",
+    "32 INSERT ANSWER HERE",
+    "33 INSERT ANSWER HERE",
+    "34 INSERT ANSWER HERE",
+    "3 INSERT CORRECT ANSWER HERE"],
 
-    ["4INSERT QUESTION HERE",
-    "41INSERT ANSWER HERE",
-    "42INSERT ANSWER HERE",
-    "43INSERT ANSWER HERE",
-    "44INSERT ANSWER HERE",
-    "4INSERT CORRECT ANSWER HERE"]
+    ["4 INSERT QUESTION HERE",
+    "41 INSERT ANSWER HERE",
+    "42 INSERT ANSWER HERE",
+    "43 INSERT ANSWER HERE",
+    "44 INSERT ANSWER HERE",
+    "4 INSERT CORRECT ANSWER HERE"]
 ]
-
-
-//WORKING ON DISPLAY QUESTIONS
-
-
 
 //display questions to user after they press start
 function displayQuestions () {
     for (var i = 0; i < questions.length; i++) {
-        var row = $("<div class='row'>");
+        //make a row for the question and append it to the mainContainer
+        var qRow = $("<div class='row text-center'>");
+        mainContainer.append(qRow);
+        //make a coloumn for the question text and append it the new row
+        var qCol = $("<div class='col-md-12'>");
+        qCol.text(questions[i][0]);
+        qRow.append(qCol);
+        //make a row for the answers and append it to the mainContainer
+        var aRow = $("<div class='row'>");
+        mainContainer.append(aRow);
+        //make a column for the answer and append it to the mainContainer
+        var aCol = $("<div class='col-md-12'>")
+        aRow.append(aCol);
+        //make a form and append it to the coloumn
+        var form = $("<form name='question-" + i + "'>");
+        aCol.append(form);
+        //loop through all answers for current question
         for (var ii = 1; ii < 5; ii++) {
-            var answer = $("<div class='col-md-3>");
-            answer.text(questions[i][ii]);
-            row.append(answer);
+            //make a button and a label for each answer and append each to the form.
+            //button IDs are answer-1, answer-2 and so on
+            //button names are answers
+            var button = $("<input type='radio' name='answers' id='answer-" + ii + "' value='" + questions[i][ii] + "'>");
+            form.append(button);
+            var label = $("<label for='answer-" + ii + "'>");
+            label.text(questions[i][ii]);
+            form.append(label);
         }
-        mainContainer.append(row);
     }
 
 }
