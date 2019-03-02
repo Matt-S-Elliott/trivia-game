@@ -1,10 +1,11 @@
-//DONE: Make a counter to countdown from 120 to 0
-
 var timeRemainingText = $("#timeRemainingText");
 var mainContainer = $("#mainContainer");
 var startButton = $("#startButton");
 var correctAnswers = 0;
 var wrongAnswers = 0;
+//create the endgame button here, but don't append it until after the questions are displayed
+var endGameButton = $("<button class='btn btn-primary btn-lg' type='button'>Submit</button>");
+
 
 //I realize using an object for the counter is a little over-complicated, but I felt
 //like doing it... So here we are.
@@ -31,7 +32,6 @@ var counter = {
         }
         return false;}
 }
-console.log(counter.countDown);
 
 //make an array of questions with correct and incorrect answers
 //TODO make questions and answers.
@@ -77,11 +77,11 @@ var questions = [
 function displayQuestions () {
     for (var i = 0; i < questions.length; i++) {
         //make a row for the question and append it to the mainContainer
-        var qRow = $("<div class='row text-center'>");
+        var qRow = $("<div class='row'>");
         mainContainer.append(qRow);
         //make a coloumn for the question text and append it the new row
         var qCol = $("<div class='col-md-12'>");
-        qCol.text(questions[i][0]);
+        qCol.text(i + 1 + ": " + questions[i][0]);
         qRow.append(qCol);
         //make a row for the answers and append it to the mainContainer
         var aRow = $("<div class='row'>");
@@ -97,13 +97,17 @@ function displayQuestions () {
             //make a button and a label for each answer and append each to the form.
             //button IDs are answer-1, answer-2 and so on
             //button names are answers
+            var newDiv = $("<div>");
             var button = $("<input class='answer' type='radio' name='answers' id='answer-" + ii + "' value='" + questions[i][ii] + "'>");
-            form.append(button);
-            var label = $("<label class='' for='answer-" + ii + "'>");
+            newDiv.append(button);
+            var label = $("<label class='answerLabel' for='answer-" + ii + "'>");
             label.text(questions[i][ii]);
-            form.append(label);
+            newDiv.append(label);
+            form.append(newDiv);
         }
     }
+    //append end game button after the questions have been displayed.
+    mainContainer.append(endGameButton);
 
 }
 
@@ -117,21 +121,31 @@ function startGame() {
 //Ends the game and tallies score
 //TODO endgame function
 function endGame () {
-    console.log("Game over!");
+    //stops the counter. I put it here so that it would stop when you end the game manually
+    //or when the time runs out.
+    clearInterval(counter.counterID);
+    checkAnswers();
+    mainContainer.empty();
+    var scoreDiv = $("<div class='jumbotron text-center'>");
+    scoreDiv.text(correctAnswers + " out of " + questions.length + " questions right!");
+    mainContainer.append(scoreDiv);
 }
 
+//checks the answers for each question to see if they are correct or not
 function checkAnswers() {
+    //Loops over each question
     for (var i = 0; i < questions.length; i++) {
         //Gets back an array containing the button elements for the question
-        var buttonsArray = $("#question-" + i).children(".answer");
+        var buttonsArray = $("#question-" + i).find(".answer");
         //Checks each button to see if it's been checked AND if the checked buttons 
         //value matches the answer of that question, then increments the correctAnswers
-        //or the wrong answers. I condensed it to take up fewer lines, I know it's a
-        //little hard to read because of that. If you format the doc it should be better
+        //or the wrong answers.
         for (var ii = 0; ii < 4; ii++) {
             if (buttonsArray[ii].checked && buttonsArray[ii].value === questions[i][5]) {
                 correctAnswers++;
-            } else { wrongAnswers++; }
+            } else if (buttonsArray[ii].checked && buttonsArray[ii].value != questions[i][5]) {
+                wrongAnswers++;
+            }
         }
     }
 }
@@ -141,13 +155,13 @@ timeRemainingText.text(counter.countDown);
 
 //Hopefully you can figure this one out
 startButton.click(startGame);
+//had to declare endgame button at beginning so that the reference to it here is valid
+//I don't actually add the button to the page until after the questions have been displayed
+endGameButton.click(endGame);
 
+
+//used for quick developement to have access to functions by pressing a key
 $(document).keyup(function () {
-    checkAnswers();
+    endGame();
     console.log(correctAnswers + "   " + wrongAnswers);
 })
-
-
-//when games ends, tally correct and incorrect answers and unanswered questions
-
-//display score to user
