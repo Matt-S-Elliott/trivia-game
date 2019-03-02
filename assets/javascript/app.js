@@ -44,33 +44,33 @@ var counter = {
 //CORRECT ANSWER]
 //correct answer should be the same exact string as the right answer choice
 var questions = [
-    ["1 INSERT QUESTION HERE",
-    "11 INSERT ANSWER HERE",
-    "12 INSERT ANSWER HERE",
-    "13 INSERT ANSWER HERE",
-    "14 INSERT ANSWER HERE",
-    "11 INSERT ANSWER HERE"],
+    ["What is the name of the story Bilbo wrote about his adventures?",
+    "The Hobbit by Bilbo Baggins",
+    "The Silmarillion by Bilbo Baggins",
+    "A Hobbits Tale by Bilbo Baggins",
+    "Into the West by Bilbo Baggins",
+    "A Hobbits Tale by Bilbo Baggins"],
 
-    ["2 INSERT QUESTION HERE",
-    "21 INSERT ANSWER HERE",
-    "22 INSERT ANSWER HERE",
-    "23 INSERT ANSWER HERE",
-    "24 INSERT ANSWER HERE",
-    "21 INSERT ANSWER HERE"],
+    ["By what name do the Elves call Gandalf?",
+    "The Grey Pilgrim",
+    "Incanus",
+    "Gandalf the Grey",
+    "Mithrandir",
+    "Mithrandir"],
 
-    ["3 INSERT QUESTION HERE",
-    "31 INSERT ANSWER HERE",
-    "32 INSERT ANSWER HERE",
-    "33 INSERT ANSWER HERE",
-    "34 INSERT ANSWER HERE",
-    "3 INSERT CORRECT ANSWER HERE"],
+    ["How many wizards were there in Middle-Earth?",
+    "2",
+    "3",
+    "5",
+    "7",
+    "5"],
 
-    ["4 INSERT QUESTION HERE",
-    "41 INSERT ANSWER HERE",
-    "42 INSERT ANSWER HERE",
-    "43 INSERT ANSWER HERE",
-    "44 INSERT ANSWER HERE",
-    "4 INSERT CORRECT ANSWER HERE"]
+    ["What is '...as hard as dragon scale and as light as a feather'?",
+    "Adamantium",
+    "Mithril",
+    "Titanium",
+    "Peregrin Tooks head",
+    "Mithril"]
 ]
 
 //display questions to user after they press start
